@@ -18,11 +18,20 @@
 # t.string "street"
 # t.string "city"
 # t.string "state"
+puts 'destroy'
 User.destroy_all
 
 genders = ['male', 'female', 'other']
 preference = ['lead', 'top rope', 'boulder', 'trad']
 skill = ['5.8', '5.9', '5.10', '5.11', '5.12', '5.13']
+
+puts'rebuild'
+
+i = 1
+
+if i == 3
+    i = 1
+end
 
 42.times do 
     User.create(
@@ -39,5 +48,40 @@ skill = ['5.8', '5.9', '5.10', '5.11', '5.12', '5.13']
         street: Faker::Address.street_name,
         city: Faker::Address.city,
         state: Faker::Address.state
+    ).photo.attach(
+        io: File.open("db/photos/#{i}.jpeg"),
+        filename: "#{i}.jpeg",
+        content_type: 'application/jpeg'
     )
 end
+
+puts 'just gotta make you'
+
+User.create(
+    username: 'Anansi',
+    password: '123',
+    fname: 'Ignas',
+    lname: 'Butautas',
+    age: 24,
+    gender: 'male',
+    climbing_preference: 'Lead',
+    commitment: 4,
+    skill_level: '5.11',
+    bio: 'hey ho lets go',
+    street: '1904 Brighton St.',
+    city: 'Downers Grove',
+    state: 'IL'
+).photo.attach(
+    io: File.open("db/photos/1.jpeg"),
+    filename: "1.jpeg",
+    content_type: 'application/jpeg'
+)
+
+puts 'just gotta make you some friends'
+j = 0
+
+12.times do
+    User.last.followers << User.all[j]
+    j += 1 
+end
+puts 'all done'

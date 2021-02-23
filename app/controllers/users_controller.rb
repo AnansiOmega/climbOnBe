@@ -7,7 +7,11 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(user_params)
-        render json: user
+        if user.valid?
+            render json: user, include: '*.*'
+        else
+            render json: { errors: user.errors.full_messages }
+        end
     end
 
     def show
