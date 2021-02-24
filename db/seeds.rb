@@ -64,7 +64,7 @@ User.create(
     lname: 'Butautas',
     age: 24,
     gender: 'male',
-    climbing_preference: 'Lead',
+    climbing_preference: 'lead',
     commitment: 4,
     skill_level: '5.11',
     bio: 'hey ho lets go',

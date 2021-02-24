@@ -19,6 +19,11 @@ class UsersController < ApplicationController
         render json: user
     end
 
+    def find
+        users = User.find_partners(params[:climbing_preference].downcase, params[:commitment].downcase, params[:skill_level].downcase, params[:gender].downcase)
+        render json: users
+    end
+
 
 
     private

@@ -11,4 +11,24 @@ class User < ApplicationRecord
     def address
         [street, city, state].compact.join(', ')
     end
+
+    def self.find_partners(climbing_preference, commitment, skill_level, gender)
+        if climbing_preference == 'any'
+            climbing_preference = ['lead', 'top rope', 'boulder', 'trad']
+        end
+
+        if skill_level == 'any'
+            skill_level = ['5.8', '5.9', '5.10', '5.11', '5.12', '5.13']
+        end
+
+        if gender == 'any'
+            gender = ['male', 'female', 'other']
+        end
+
+        if commitment == 'any'
+            commitment = 1..7
+        end
+        
+        self.where(climbing_preference: climbing_preference, commitment: commitment, skill_level: skill_level, gender: gender)
+    end
 end
