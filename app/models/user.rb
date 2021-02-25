@@ -12,7 +12,7 @@ class User < ApplicationRecord
         [street, city, state].compact.join(', ')
     end
 
-    def self.find_partners(climbing_preference, commitment, skill_level, gender)
+    def self.find_partners(climbing_preference, skill_level, gender, commitment, distance, id)
         if climbing_preference == 'any'
             climbing_preference = ['lead', 'top rope', 'boulder', 'trad']
         end
@@ -28,7 +28,11 @@ class User < ApplicationRecord
         if commitment == 'any'
             commitment = 1..7
         end
-        
-        self.where(climbing_preference: climbing_preference, commitment: commitment, skill_level: skill_level, gender: gender)
+
+        if distance == 'any'
+            return self.where(climbing_preference: climbing_preference, commitment: commitment, skill_level: skill_level, gender: gender)
+        end
+        user = self.find(id)
+        user.nearbys(distance).where(climbing_preference: climbing_preference, commitment: commitment, skill_level: skill_level, gender: gender)
     end
 end

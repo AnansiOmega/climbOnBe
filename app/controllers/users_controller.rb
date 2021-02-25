@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     end
 
     def create
+        byebug
         user = User.create(user_params)
         if user.valid?
             render json: user, include: '*.*'
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
     end
 
     def find
-        users = User.find_partners(params[:climbing_preference].downcase, params[:commitment].downcase, params[:skill_level].downcase, params[:gender].downcase)
+        users = User.find_partners(params[:climbing_preference].downcase, params[:commitment].downcase, params[:skill_level].downcase, params[:gender].downcase, params[:distance].downcase, params[:id])
         render json: users
     end
 
