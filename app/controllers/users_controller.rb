@@ -21,15 +21,24 @@ class UsersController < ApplicationController
     end
 
     def find
-        users = User.find_partners(params[:climbing_preference].downcase, params[:commitment].downcase, params[:skill_level].downcase, params[:gender].downcase, params[:distance].downcase, params[:id])
+        users = User.find_partners(find_params)
         render json: users
     end
 
+    
 
 
     private
 
     def user_params
         params.permit(:username, :password, :fname, :lname, :age, :gender, :climbing_preference, :commitment, :skill_level, :bio, :street, :city, :state, :photo)
+    end
+
+    def find_params
+        params.permit(:gender, :climbing_preference, :commitment, :skill_level, :gender, :distance, :id)
+    end
+
+    def connect_params
+        params.permit(:root_user_id, :id)
     end
 end

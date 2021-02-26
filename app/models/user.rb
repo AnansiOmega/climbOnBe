@@ -12,7 +12,14 @@ class User < ApplicationRecord
         [street, city, state].compact.join(', ')
     end
 
-    def self.find_partners(climbing_preference, skill_level, gender, commitment, distance, id)
+    def self.find_partners(args) #grabs partner params and finds users based off of params
+        climbing_preference = args['climbing_preference'].downcase #couldn't figure a way to destructure, So this is my way of doing it
+        skill_level = args['skill_level'].downcase
+        gender = args['gender'].downcase
+        commitment = args['commitment'].downcase
+        distance = args['distance'].downcase
+        id = args['id']
+
         if climbing_preference == 'any'
             climbing_preference = ['lead', 'top rope', 'boulder', 'trad']
         end
