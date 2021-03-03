@@ -20,6 +20,7 @@
 # t.string "state"
 puts 'destroy'
 User.destroy_all
+# Friendship.destroy_all
 
 genders = ['male', 'female', 'other']
 preference = ['lead', 'top rope', 'boulder', 'trad']
@@ -78,10 +79,10 @@ User.create(
 )
 
 puts 'just gotta make you some friends'
-j = 0
+# j = 0
 
-12.times do
-    User.last.followers << User.all[j]
-    j += 1 
-end
+# 12.times do
+#     User.last.followers << User.all[j]
+#     j += 1 
+# end
 puts 'all done'

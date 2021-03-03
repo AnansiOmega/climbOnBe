@@ -1,6 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :fname, :lname, :age, :gender, :climbing_preference, :commitment, :skill_level, :bio, :street, :city, :state, :photo, :password
-  has_many :followers, through: :following_users
+  has_many :notifications
+  has_many :friends
 
   include Rails.application.routes.url_helpers
   

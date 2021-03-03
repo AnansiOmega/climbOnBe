@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     end
 
     def create
-        byebug
         user = User.create(user_params)
         if user.valid?
             render json: user, include: '*.*'
@@ -23,6 +22,11 @@ class UsersController < ApplicationController
     def find
         users = User.find_partners(find_params)
         render json: users
+    end
+
+    def friend_requests
+        user = User.find(params[:id])
+        render json: user.received_requests
     end
 
     

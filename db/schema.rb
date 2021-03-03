@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_210817) do
+ActiveRecord::Schema.define(version: 2021_03_02_194735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,23 @@ ActiveRecord::Schema.define(version: 2021_02_22_210817) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "follows", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followee_id"
-    t.boolean "connected", default: false
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "sent_to_id", null: false
+    t.bigint "sent_by_id", null: false
+    t.boolean "status", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["sent_by_id"], name: "index_friendships_on_sent_by_id"
+    t.index ["sent_to_id"], name: "index_friendships_on_sent_to_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "notice_id"
+    t.string "notice_type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,4 +76,7 @@ ActiveRecord::Schema.define(version: 2021_02_22_210817) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "friendships", "users", column: "sent_by_id"
+  add_foreign_key "friendships", "users", column: "sent_to_id"
+  add_foreign_key "notifications", "users"
 end

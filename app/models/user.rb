@@ -3,10 +3,22 @@ class User < ApplicationRecord
     has_one_attached :photo
     geocoded_by :address
     after_validation :geocode
-    has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
-    has_many :followees, through: :followed_users
-    has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
-    has_many :followers, through: :following_users
+    has_many :friend_sent, class_name: 'Friendship',
+                          foreign_key: 'sent_by_id',
+                          inverse_of: 'sent_by',
+                          dependent: :destroy
+    has_many :friend_request, class_name: 'Friendship',
+                          foreign_key: 'sent_to_id',
+                          inverse_of: 'sent_to',
+                          dependent: :destroy
+    has_many :friends, -> { merge(Friendship.friends) },
+             through: :friend_sent, source: :sent_to
+    has_many :pending_requests, -> { merge(Friendship.not_friends) },
+             through: :friend_sent, source: :sent_to
+    has_many :received_requests, -> { merge(Friendship.not_friends) },
+             through: :friend_request, source: :sent_by
+    has_many :notifications, dependent: :destroy
+
 
     def address
         [street, city, state].compact.join(', ')
