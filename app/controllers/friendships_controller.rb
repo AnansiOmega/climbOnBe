@@ -32,6 +32,7 @@ class FriendshipsController < ApplicationController
     end
 
     def decline_friend
+        current_user = User.find(params[:current_user_id])
         friendship = Friendship.find_by(sent_by_id: params[:user_id], sent_to_id: current_user.id, status: false)
         return unless friendship
 

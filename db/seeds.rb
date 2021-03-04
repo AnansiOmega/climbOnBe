@@ -20,7 +20,8 @@
 # t.string "state"
 puts 'destroy'
 User.destroy_all
-# Friendship.destroy_all
+Friendship.destroy_all
+Notification.destroy_all
 
 genders = ['male', 'female', 'other']
 preference = ['lead', 'top rope', 'boulder', 'trad']
@@ -34,7 +35,7 @@ if i == 3
     i = 1
 end
 
-42.times do 
+21.times do 
     User.create(
         username: Faker::FunnyName.name,
         password: '123',
