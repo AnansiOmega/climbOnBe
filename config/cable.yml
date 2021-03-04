@@ -1,8 +1,21 @@
+# development:
+#   adapter: async
+
+# test:
+#   adapter: test
+
+# production:
+#   adapter: redis
+#   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+#   channel_prefix: climb_on_BE_production
+
 development:
-  adapter: async
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: climb_on_BE_production
 
 test:
-  adapter: test
+  adapter: async
 
 production:
   adapter: redis

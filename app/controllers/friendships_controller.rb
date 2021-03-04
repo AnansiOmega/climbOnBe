@@ -26,6 +26,8 @@ class FriendshipsController < ApplicationController
         if friendship.save
             friendship2 = current_user.friend_sent.build(sent_to_id: params[:user_id], status: true)
             friendship2.save
+            notification = Notification.find_by(notice_id: params[:user_id], user_id: current_user.id)
+            notification.destroy
         else
             render json: {errors: "Friend Request could not be accepted" }
         end
@@ -35,7 +37,8 @@ class FriendshipsController < ApplicationController
         current_user = User.find(params[:current_user_id])
         friendship = Friendship.find_by(sent_by_id: params[:user_id], sent_to_id: current_user.id, status: false)
         return unless friendship
-
+        notification = Notification.find_by(notice_id: params[:user_id], user_id: current_user.id)
+        notification.destroy
         friendship.destroy
         render json: {message: "Friend Request Declined" }        
     end

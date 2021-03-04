@@ -19,9 +19,11 @@
 # t.string "city"
 # t.string "state"
 puts 'destroy'
+Notification.destroy_all
+Message.destroy_all
+Conversation.destroy_all
 User.destroy_all
 Friendship.destroy_all
-Notification.destroy_all
 
 genders = ['male', 'female', 'other']
 preference = ['lead', 'top rope', 'boulder', 'trad']

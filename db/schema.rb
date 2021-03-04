@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_194735) do
+ActiveRecord::Schema.define(version: 2021_03_04_173641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2021_03_02_194735) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.bigint "sent_to_id", null: false
     t.bigint "sent_by_id", null: false
@@ -44,6 +52,16 @@ ActiveRecord::Schema.define(version: 2021_03_02_194735) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["sent_by_id"], name: "index_friendships_on_sent_by_id"
     t.index ["sent_to_id"], name: "index_friendships_on_sent_to_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -78,5 +96,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_194735) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "friendships", "users", column: "sent_by_id"
   add_foreign_key "friendships", "users", column: "sent_to_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
 end

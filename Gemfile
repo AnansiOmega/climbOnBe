@@ -19,6 +19,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'jwt'
 gem 'faker'
 gem 'geocoder', '~> 1.6', '>= 1.6.5'
+gem 'redis'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
