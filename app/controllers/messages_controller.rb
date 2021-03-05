@@ -3,12 +3,16 @@ class MessagesController < ApplicationController
     def create
         conversation = Conversation.includes(:recipient).find(params[:conversation_id])
         message = conversation.messages.create(message_params)
-        MessagesChannel.broadcast_to conversation, message
-        head :ok
+        serialized_data = ActiveModelSerializers::Adapter::Json.new(
+            MessageSerializer.new(message)
+            ).serializable_hash
+            
+            MessagesChannel.broadcast_to conversation, serialized_data
+            head :ok
+            
+            # byebug
+            # puts 'hi'
         # ConversationChannel.broadcast_to(conversation, message)
-        # byebug
-
-        # puts 'hi'
     end
 
 
