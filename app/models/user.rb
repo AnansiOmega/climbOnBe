@@ -20,7 +20,9 @@ class User < ApplicationRecord
     has_many :notifications, dependent: :destroy
     has_many :messages
     has_many :conversations, foreign_key: :sender_id
-
+    has_many :posts
+    has_many :comments
+    has_many :likes, dependent: :destroy
 
     def address
         [street, city, state].compact.join(', ')
@@ -55,5 +57,18 @@ class User < ApplicationRecord
         end
         user = self.find(id)
         user.nearbys(distance).where(climbing_preference: climbing_preference, commitment: commitment, skill_level: skill_level, gender: gender)
+    end
+    
+    def user_and_friend_posts
+        all_posts = []
+        friends.each do |friend|
+            friend.posts.each do |post|
+                all_posts << post
+            end
+        end
+        posts.each do |post|
+            all_posts << post
+        end
+        all_posts
     end
 end
