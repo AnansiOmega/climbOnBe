@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post '/accept-friend', to: 'friendships#accept_friend'
   post '/reject-friend', to: 'friendships#decline_friend'
   post '/message-notification', to: 'messages#delete_notifications'
+  get '/user-and-friend-posts/:id', to: 'posts#user_and_friends_posts'
+  get '/show-comments/:id', to: 'comments#show_comments'
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

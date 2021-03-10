@@ -6,6 +6,11 @@ class CommentsController < ApplicationController
         render json: comment
     end
 
+    def show_comments
+        post = Post.find(params[:id])
+        render json: post.comments, include: '*.*'
+    end
+
 
 
 
