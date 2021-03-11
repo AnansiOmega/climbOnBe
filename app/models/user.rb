@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
     has_one_attached :photo
+    has_one_attached :background_image
     geocoded_by :address
     after_validation :geocode
     has_many :friend_sent, class_name: 'Friendship',

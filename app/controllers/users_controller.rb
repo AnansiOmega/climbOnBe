@@ -19,7 +19,13 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def find
+    def update
+        user = User.find(params[:id])
+        user.update(user_params)
+        render json: user
+    end
+
+    def find_climbers
         users = User.find_partners(find_params)
         render json: users
     end
@@ -35,7 +41,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password, :fname, :lname, :age, :gender, :climbing_preference, :commitment, :skill_level, :bio, :street, :city, :state, :photo)
+        params.permit(:username, :password, :fname, :lname, :age, :gender, :climbing_preference, :commitment, :skill_level, :bio, :street, :city, :state, :photo, :background_image)
     end
 
     def find_params
