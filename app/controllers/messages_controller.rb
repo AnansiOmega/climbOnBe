@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
         conversation = Conversation.includes(:recipient).find(params[:conversation_id])
         message = conversation.messages.create(message_params)
         Notification.create(user_id: conversation.sender_id, notice_type: 'newMessage', notice_id: conversation.recipient_id)
+        Notification.create(user_id: conversation.recipient_id, notice_type: 'newMessage', notice_id: conversation.sender_id)
         serialized_data = ActiveModelSerializers::Adapter::Json.new(
             MessageSerializer.new(message)
             ).serializable_hash
