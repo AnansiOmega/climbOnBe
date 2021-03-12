@@ -4,6 +4,10 @@ class PostsController < ApplicationController
         user = User.find(params[:id])
         posts = user.user_and_friend_posts
         render json: posts, include: '*.*'
+    end 
+
+    def users_posts
+        render json: Post.where( user_id: params[:id]), include: '*.*'
     end
 
     def create
