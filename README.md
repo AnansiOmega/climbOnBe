@@ -1,25 +1,6 @@
 # README
+This is the Backend Associated with the [Frontend](https://github.com/AnansiOmega/ClimbOn) of Climb on
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The backend features, Geolocation, Action Cable and borrows heavily from Facebook Architecture.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # climbOnBe
