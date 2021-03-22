@@ -6,4 +6,4 @@ This API is built mimicking Facebooks User Experience. Therefore, you can see ma
 
 The technologies used for this API are: Postgresql, Redis (for Action Cable Provider), Bcrypt, Jwt, Geocoder, and ActiveStorage.
 
-# climbOnBe
+Got a question, comment, or some feedback? Let me know!
