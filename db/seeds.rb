@@ -19,11 +19,14 @@
 # t.string "city"
 # t.string "state"
 puts 'destroy'
+Comment.destroy_all
+Post.destroy_all
 Notification.destroy_all
 Message.destroy_all
 Conversation.destroy_all
-User.destroy_all
 Friendship.destroy_all
+Like.destroy_all
+User.destroy_all
 
 genders = ['male', 'female', 'other']
 preference = ['lead', 'top rope', 'boulder', 'trad']
@@ -53,7 +56,7 @@ end
         city: Faker::Address.city,
         state: Faker::Address.state
     ).photo.attach(
-        io: File.open("db/photos/#{i}.jpeg"),
+        io: File.open("db/photos/default_avatar.jpg"),
         filename: "#{i}.jpeg",
         content_type: 'application/jpeg'
     )

@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password, :fname, :lname, :age, :gender, :climbing_preference, :commitment, :skill_level, :bio, :street, :city, :state, :photo, :background_image)
+        params.permit(:username, :password, :fname, :lname, :age, :gender, :climbing_preference.downcase, :commitment, :skill_level, :bio, :street, :city, :state, :photo, :background_image)
     end
 
     def find_params

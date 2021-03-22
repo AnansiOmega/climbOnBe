@@ -24,6 +24,9 @@ class User < ApplicationRecord
     has_many :posts
     has_many :comments
     has_many :likes, dependent: :destroy
+    
+    validates :username, :fname, :lname, :password_digest, :age, :gender, :climbing_preference, :commitment, :skill_level, :street, :city, :state, presence: true
+    validates :username, uniqueness: true
 
     def address
         [street, city, state].compact.join(', ')
