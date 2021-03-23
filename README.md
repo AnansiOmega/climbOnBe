@@ -1,25 +1,9 @@
-# README
+# Climb On BE README
+This is the Backend Associated with the [Frontend](https://github.com/AnansiOmega/ClimbOn) of Climb on
+<h2> *This project is still under Developement* </h2>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This API is built mimicking Facebooks User Experience. Therefore, you can see many similarities. Such as, Friendships ( which can be declined ) The ability to make posts, comments, messages, photo uploads, and much more.
 
-Things you may want to cover:
+The technologies used for this API are: Postgresql, Redis (for Action Cable Provider), Bcrypt, Jwt, Geocoder, and ActiveStorage.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# climbOnBe
+Got a question, comment, or some feedback? Let me know!
